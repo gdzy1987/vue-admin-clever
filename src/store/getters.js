@@ -14,5 +14,5 @@ export default {
   selectedTag: (state) => state.tagsView.selectedTag,
   srcTableCode: (state) => state.table.srcCode,
   tagsView: (state) => state.settings.tagsView,
-  visitedViews: (state) => state.tagsView.visitedViews,
+  visitedRoutes: (state) => state.tagsView.visitedRoutes,
 };

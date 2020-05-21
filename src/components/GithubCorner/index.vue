@@ -1,6 +1,6 @@
 <template>
   <a
-    href="https://github.com/chuzhixin/vue-admin-clever"
+    href="https://github.com/chuzhixin/vue-admin-beautiful"
     target="_blank"
     class="github-corner"
     aria-label="View source on Github"

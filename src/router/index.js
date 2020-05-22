@@ -110,7 +110,7 @@ export const asyncRoutes = [
       },
     ],
   },
-  /* {
+  {
     path: "/byui",
     component: Layout,
     redirect: "noRedirect",
@@ -389,7 +389,7 @@ export const asyncRoutes = [
         meta: { title: "更多组件", permissions: ["admin"] },
       },
     ],
-  }, */
+  },
 
   {
     path: "/error",

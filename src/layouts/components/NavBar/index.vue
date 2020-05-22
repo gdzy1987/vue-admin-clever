@@ -80,16 +80,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      "routes",
-      "avatar",
-      "collapse",
-      "userName",
-      "loginTimes",
-      "lastLoginTime",
-      "selectedTag",
-      "device",
-    ]),
+    ...mapGetters({
+      avatar: "user/avatar",
+      collapse: "settings/collapse",
+      userName: "user/userName",
+      visitedRoutes: "tagsBar/visitedRoutes",
+      device: "settings/device",
+      routes: "permission/routes",
+    }),
 
     handleRoutes() {
       let arr = this.routes.map((item) => {

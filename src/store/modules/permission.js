@@ -1,27 +1,12 @@
 import { asyncRoutes, constantRoutes } from "@/router";
 import { getRouterList } from "@/api/router";
-import { filterRoutes } from "@/utils/filterRoutes";
-function hasPermission(permissions, route) {
-  if (route.meta && route.meta.permissions) {
-    return permissions.some((role) => route.meta.permissions.includes(role));
-  } else {
-    return true;
-  }
-}
-function filterAsyncRoutes(routes, permissions) {
-  const res = [];
-  routes.forEach((route) => {
-    const tmp = { ...route };
-    if (hasPermission(permissions, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, permissions);
-      }
-      res.push(tmp);
-    }
-  });
-  return res;
-}
+import { filterAsyncRoutes, filterRoutes } from "@/utils/handleRoutes";
+
 const state = { routes: [], partialRoutes: [] };
+const getters = {
+  routes: (state) => state.routes,
+  partialRoutes: (state) => state.partialRoutes,
+};
 const mutations = {
   setRoutes: (state, routes) => {
     state.routes = constantRoutes.concat(routes);
@@ -62,10 +47,9 @@ const actions = {
   },
   setPartialRoutes({ commit }, accessRoutes) {
     return new Promise((resolve) => {
-      console.log(accessRoutes);
       commit("setPartialRoutes", accessRoutes);
       resolve(accessRoutes);
     });
   },
 };
-export default { state, mutations, actions };
+export default { state, getters, mutations, actions };

@@ -26,7 +26,7 @@
 <script>
 import path from "path";
 import Logo from "@/layouts/components/Logo";
-import SideBarItem from "./SideBarItem";
+import SideBarItem from "zx-side-bar/SideBarItem";
 import variables from "@/styles/variables.scss";
 import { mapGetters } from "vuex";
 
@@ -37,7 +37,10 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["collapse", "partialRoutes"]),
+    ...mapGetters({
+      collapse: "settings/collapse",
+      partialRoutes: "permission/partialRoutes",
+    }),
     defaultOpen() {
       if (this.collapse) {
       }

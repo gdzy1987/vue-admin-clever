@@ -3,6 +3,15 @@
     <el-row :gutter="15">
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <el-alert
+          type="error"
+          title="这是一个抄袭vue-admin-beautiful的框架，只是将原作者框架改为上下布局的方式，喷子手下留情，原版地址在下边"
+          :closable="false"
+          ><a href="https://github.com/chuzhixin/vue-admin-beautiful"
+            >https://github.com/chuzhixin/vue-admin-beautiful</a
+          >
+        </el-alert>
+        <br />
+        <el-alert
           type="success"
           title="本框架已在开源框架vue-admin-beautiful基础上升级改造，实现了更人性化的布局和操作方案，并且已获得框架原作者授权，并有幸成为github贡献者，此后vue-admin-clever会同步更新vue-admin-beautiful，致敬vue-admin-beautiful"
           :closable="false"
@@ -142,6 +151,9 @@
             </tr>
           </table>
           <div class="bottom-btn">
+            <el-button type="primary"
+              >我的QQ号（非原作者） 2533447308</el-button
+            >
             <el-popover placement="top" width="250" trigger="hover">
               <p>
                 谢谢您愿意支持开源，加群获取详细教程，群内提供vue-admin-clever-template基础模板

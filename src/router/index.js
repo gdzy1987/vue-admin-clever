@@ -30,10 +30,6 @@ export const asyncRoutes = [
     path: "/",
     component: Layout,
     redirect: "/index",
-    meta: {
-      title: "首页",
-      icon: "home",
-    },
     children: [
       {
         path: "/index",
@@ -47,11 +43,6 @@ export const asyncRoutes = [
       },
     ],
   },
-  {
-    path: "/image",
-    component: () => import("@/views/vab/word/image"),
-    hidden: true,
-  },
   /* {
     path: "/test",
     component: Layout,
@@ -64,49 +55,31 @@ export const asyncRoutes = [
         meta: {
           title: "test",
           icon: "marker",
-          permissions: ["admin", "test"],
+          permissions: ["admin"],
         },
       },
     ],
   }, */
   {
-    path: "/mall",
+    path: "/personnelManagement",
     component: Layout,
     redirect: "noRedirect",
-    name: "Mall",
-    meta: {
-      title: "商城模板",
-      icon: "shopping-cart",
-      permissions: ["admin"],
-    },
-    alwaysShow: true,
-
+    name: "PersonnelManagement",
+    meta: { title: "人员", icon: "users-cog", permissions: ["admin"] },
     children: [
       {
-        path: "pay",
-        name: "Pay",
-        component: () => import("@/views/mall/pay/index"),
-        meta: {
-          title: "支付",
-          noKeepAlive: true,
-        },
-        children: null,
+        path: "userManagement",
+        name: "UserManagement",
+        component: () =>
+          import("@/views/personnelManagement/userManagement/index"),
+        meta: { title: "用户管理" },
       },
       {
-        path: "goodsList",
-        name: "GoodsList",
-        component: () => import("@/views/mall/goodsList/index"),
-        meta: {
-          title: "商品列表",
-        },
-      },
-      {
-        path: "goodsDetail",
-        name: "GoodsDetail",
-        component: () => import("@/views/mall/goodsDetail/index"),
-        meta: {
-          title: "商品详情",
-        },
+        path: "roleManagement",
+        name: "RoleManagement",
+        component: () =>
+          import("@/views/personnelManagement/roleManagement/index"),
+        meta: { title: "角色管理" },
       },
     ],
   },
@@ -115,69 +88,38 @@ export const asyncRoutes = [
     component: Layout,
     redirect: "noRedirect",
     name: "Vab",
-    meta: { title: "组件", icon: "cloud" },
     alwaysShow: true,
+    meta: { title: "组件", icon: "cloud" },
     children: [
       {
-        path: "permission",
-        name: "Permission",
-        component: () => import("@/views/vab/permission/index"),
+        path: "icon",
+        component: EmptyLayout,
+        redirect: "noRedirect",
+        name: "Icon",
         meta: {
-          title: "权限控制",
-          permissions: ["admin", "editor", "test"],
-        },
-      },
-      {
-        path: "menu1",
-        component: () => import("@/views/vab/nested/menu1/index"),
-        name: "Menu1",
-        meta: {
-          title: "嵌套路由 1",
+          title: "图标",
           permissions: ["admin"],
         },
-        alwaysShow: true,
         children: [
           {
-            path: "menu1-1",
-            component: () => import("@/views/vab/nested/menu1/menu1-1/index"),
-            name: "Menu1-1",
-            meta: { title: "嵌套路由 1-1" },
-            alwaysShow: true,
-            children: [
-              {
-                path: "menu1-1-1",
-                component: () =>
-                  import("@/views/vab/nested/menu1/menu1-1/menu1-1-1/index"),
-                name: "Menu1-1-1",
-                meta: { title: "嵌套路由 1-1-1" },
-              },
-            ],
+            path: "awesomeIcon",
+            name: "AwesomeIcon",
+            component: () => import("@/views/vab/icon/index"),
+            meta: { title: "常规图标" },
+          },
+          {
+            path: "remixIcon",
+            name: "RemixIcon",
+            component: () => import("@/views/vab/icon/remixIcon"),
+            meta: { title: "小清新图标" },
+          },
+          {
+            path: "colorfulIcon",
+            name: "ColorfulIcon",
+            component: () => import("@/views/vab/icon/colorfulIcon"),
+            meta: { title: "多彩图标" },
           },
         ],
-      },
-      {
-        path: "verify",
-        name: "Verify",
-        component: () => import("@/views/vab/verify/index"),
-        meta: { title: "验证码", permissions: ["admin"] },
-      },
-      {
-        path: "icon",
-        name: "Icon",
-        component: () => import("@/views/vab/icon/index"),
-        meta: { title: "常规图标", permissions: ["admin"] },
-      },
-      {
-        path: "remixIcon",
-        name: "RemixIcon",
-        component: () => import("@/views/vab/icon/remixIcon"),
-        meta: { title: "小清新图标", permissions: ["admin"] },
-      },
-      {
-        path: "colorfulIcon",
-        name: "ColorfulIcon",
-        component: () => import("@/views/vab/icon/colorfulIcon"),
-        meta: { title: "多彩图标", permissions: ["admin"] },
       },
       {
         path: "table",
@@ -186,22 +128,34 @@ export const asyncRoutes = [
         name: "Table",
         meta: {
           title: "表格",
+          permissions: ["admin"],
         },
-        alwaysShow: true,
         children: [
           {
             path: "comprehensiveTable",
             name: "ComprehensiveTable",
             component: () => import("@/views/vab/table/index"),
-            meta: { title: "综合表格", permissions: ["admin"] },
+            meta: { title: "综合表格" },
           },
           {
             path: "inlineEditTable",
             name: "InlineEditTable",
             component: () => import("@/views/vab/table/inlineEditTable"),
-            meta: { title: "行内编辑", permissions: ["admin"] },
+            meta: { title: "行内编辑" },
           },
         ],
+      },
+      {
+        path: "map",
+        name: "Map",
+        component: () => import("@/views/vab/map/index"),
+        meta: { title: "地图", permissions: ["admin"] },
+      },
+      {
+        path: "webSocket",
+        name: "WebSocket",
+        component: () => import("@/views/vab/webSocket/index"),
+        meta: { title: "webSocket", permissions: ["admin"] },
       },
       {
         path: "form",
@@ -226,6 +180,59 @@ export const asyncRoutes = [
         name: "Card",
         component: () => import("@/views/vab/card/index"),
         meta: { title: "卡片", permissions: ["admin"] },
+      },
+      {
+        path: "permission",
+        name: "Permission",
+        component: () => import("@/views/vab/permission/index"),
+        meta: {
+          title: "权限控制",
+          permissions: ["admin", "editor"],
+        },
+      },
+      {
+        path: "betterScroll",
+        name: "BetterScroll",
+        component: () => import("@/views/vab/betterScroll/index"),
+        meta: {
+          title: "滚动侦测",
+          permissions: ["admin"],
+        },
+      },
+      {
+        path: "verify",
+        name: "Verify",
+        component: () => import("@/views/vab/verify/index"),
+        meta: { title: "验证码", permissions: ["admin"] },
+      },
+      {
+        path: "menu1",
+        component: () => import("@/views/vab/nested/menu1/index"),
+        name: "Menu1",
+        alwaysShow: true,
+        meta: {
+          title: "嵌套路由 1",
+          permissions: ["admin"],
+        },
+        children: [
+          {
+            path: "menu1-1",
+            name: "Menu1-1",
+            alwaysShow: true,
+            meta: { title: "嵌套路由 1-1" },
+            component: () => import("@/views/vab/nested/menu1/menu1-1/index"),
+
+            children: [
+              {
+                path: "menu1-1-1",
+                name: "Menu1-1-1",
+                meta: { title: "嵌套路由 1-1-1" },
+                component: () =>
+                  import("@/views/vab/nested/menu1/menu1-1/menu1-1-1/index"),
+              },
+            ],
+          },
+        ],
       },
       {
         path: "magnifier",
@@ -330,29 +337,30 @@ export const asyncRoutes = [
         name: "Excel",
         meta: {
           title: "Excel",
+          permissions: ["admin"],
         },
         children: [
           {
-            path: "export-excel",
-            component: () => import("@/views/vab/excel/export-excel"),
+            path: "exportExcel",
+            component: () => import("@/views/vab/excel/exportExcel"),
             name: "ExportExcel",
             meta: { title: "导出Excel" },
           },
           {
-            path: "export-selected-excel",
-            component: () => import("@/views/vab/excel/select-excel"),
-            name: "SelectExcel",
+            path: "exportSelectedExcel",
+            component: () => import("@/views/vab/excel/exportSelectExcel"),
+            name: "ExportSelectedExcel",
             meta: { title: "导出选中行" },
           },
           {
-            path: "export-merge-header",
-            component: () => import("@/views/vab/excel/merge-header"),
-            name: "MergeHeader",
+            path: "exportMergeHeaderExcel",
+            component: () => import("@/views/vab/excel/exportMergeHeaderExcel"),
+            name: "ExportMergeHeaderExcel",
             meta: { title: "导出合并" },
           },
           {
-            path: "upload-excel",
-            component: () => import("@/views/vab/excel/upload-excel"),
+            path: "uploadExcel",
+            component: () => import("@/views/vab/excel/uploadExcel"),
             name: "UploadExcel",
             meta: { title: "上传Excel" },
           },
@@ -374,13 +382,7 @@ export const asyncRoutes = [
         path: "news",
         name: "News",
         component: () => import("@/views/vab/news/index"),
-        meta: { title: "新闻（可能存在跨域）", permissions: ["admin"] },
-      },
-      {
-        path: "word",
-        name: "Word",
-        component: () => import("@/views/vab/word/index"),
-        meta: { title: "word下载", permissions: ["admin"] },
+        meta: { title: "新闻", permissions: ["admin"] },
       },
       {
         path: "more",
@@ -390,14 +392,52 @@ export const asyncRoutes = [
       },
     ],
   },
+  {
+    path: "/mall",
+    component: Layout,
+    redirect: "noRedirect",
+    name: "Mall",
+    meta: {
+      title: "商城",
+      icon: "shopping-cart",
+      permissions: ["admin"],
+    },
 
+    children: [
+      {
+        path: "pay",
+        name: "Pay",
+        component: () => import("@/views/mall/pay/index"),
+        meta: {
+          title: "支付",
+          noKeepAlive: true,
+        },
+        children: null,
+      },
+      {
+        path: "goodsList",
+        name: "GoodsList",
+        component: () => import("@/views/mall/goodsList/index"),
+        meta: {
+          title: "商品列表",
+        },
+      },
+      {
+        path: "goodsDetail",
+        name: "GoodsDetail",
+        component: () => import("@/views/mall/goodsDetail/index"),
+        meta: {
+          title: "商品详情",
+        },
+      },
+    ],
+  },
   {
     path: "/error",
     component: EmptyLayout,
     redirect: "noRedirect",
     name: "Error",
     meta: { title: "错误页", icon: "bug" },
-    alwaysShow: true,
     children: [
       {
         path: "/401",
@@ -427,7 +467,10 @@ const router = new VueRouter({
   }),
   routes: constantRoutes,
 });
-
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
 export function resetRouter() {
   router.matcher = new VueRouter({
     mode: "hash",
@@ -438,8 +481,4 @@ export function resetRouter() {
   }).matcher;
 }
 
-const routerPush = VueRouter.prototype.push;
-VueRouter.prototype.push = function push(location) {
-  return routerPush.call(this, location).catch((error) => error);
-};
 export default router;

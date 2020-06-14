@@ -1,10 +1,10 @@
 {
-  "name": "vue-admin-clever",
+  "name": "clever-admin",
   "version": "1.0.0",
   "private": true,
-  "author": "chuzhixin <1204505056@qq.com>",
+  "author": "chuzhixin",
   "participants": [],
-  "homepage": "https://chu1204505056.gitee.io/vue-admin-clever",
+  "homepage": "https://chu1204505056.gitee.io/vue-admin-beautiful",
   "scripts": {
     "serve": "vue-cli-service serve",
     "preview": "node preview/index.js",

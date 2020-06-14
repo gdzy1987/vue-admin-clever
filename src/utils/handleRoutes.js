@@ -1,9 +1,9 @@
 /**
- * @description 渲染路由
+ * @description all模式渲染后端返回路由
  * @param constantRoutes
  * @returns {*}
  */
-export function filterRoutes(constantRoutes) {
+export function filterAllRoutes(constantRoutes) {
   return constantRoutes.filter((route) => {
     if (route.component) {
       if (route.component === "Layout") {
@@ -17,7 +17,7 @@ export function filterRoutes(constantRoutes) {
       }
     }
     if (route.children && route.children.length) {
-      route.children = filterRoutes(route.children);
+      route.children = filterAllRoutes(route.children);
     }
     if (route.children && route.children.length === 0) {
       delete route.children;
@@ -26,6 +26,12 @@ export function filterRoutes(constantRoutes) {
   });
 }
 
+/**
+ * @description 判断当前路由是否包含权限
+ * @param permissions
+ * @param route
+ * @returns {boolean|*}
+ */
 function hasPermission(permissions, route) {
   if (route.meta && route.meta.permissions) {
     return permissions.some((role) => route.meta.permissions.includes(role));
@@ -33,16 +39,23 @@ function hasPermission(permissions, route) {
     return true;
   }
 }
+
+/**
+ * @description intelligence模式根据permissions数组拦截路由
+ * @param routes
+ * @param permissions
+ * @returns {[]}
+ */
 export function filterAsyncRoutes(routes, permissions) {
-  const res = [];
+  const finallyRoutes = [];
   routes.forEach((route) => {
-    const tmp = { ...route };
-    if (hasPermission(permissions, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, permissions);
+    const item = { ...route };
+    if (hasPermission(permissions, item)) {
+      if (item.children) {
+        item.children = filterAsyncRoutes(item.children, permissions);
       }
-      res.push(tmp);
+      finallyRoutes.push(item);
     }
   });
-  return res;
+  return finallyRoutes;
 }

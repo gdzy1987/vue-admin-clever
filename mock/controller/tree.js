@@ -2,9 +2,9 @@ const data = [
   {
     id: "1",
     parentId: "0",
-    name: "vue-admin-clever科技有限公司",
-    title: "vue-admin-clever科技有限公司",
-    text: "vue-admin-clever科技有限公司",
+    name: "vue-admin-beautiful科技有限公司",
+    title: "vue-admin-beautiful科技有限公司",
+    text: "vue-admin-beautiful科技有限公司",
     value: "1",
     rank: 1,
     children: [

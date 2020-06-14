@@ -1,6 +1,6 @@
 import { asyncRoutes, constantRoutes } from "@/router";
 import { getRouterList } from "@/api/router";
-import { filterAsyncRoutes, filterRoutes } from "@/utils/handleRoutes";
+import { filterAllRoutes, filterAsyncRoutes } from "@/utils/handleRoutes";
 
 const state = { routes: [], partialRoutes: [] };
 const getters = {
@@ -8,48 +8,38 @@ const getters = {
   partialRoutes: (state) => state.partialRoutes,
 };
 const mutations = {
-  setRoutes: (state, routes) => {
+  setRoutes(state, routes) {
     state.routes = constantRoutes.concat(routes);
   },
-  setAllRoutes: (state, routes) => {
+  setAllRoutes(state, routes) {
     state.routes = constantRoutes.concat(routes);
   },
-  setPartialRoutes: (state, routes) => {
+  setPartialRoutes(state, routes) {
     state.partialRoutes = constantRoutes.concat(routes);
   },
 };
 const actions = {
-  setRoutes({ commit }, permissions) {
-    return new Promise((resolve) => {
-      let accessedRoutes;
-      if (permissions.includes("admin")) {
-        accessedRoutes = asyncRoutes || [];
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions);
-      }
-      commit("setRoutes", accessedRoutes);
-      resolve(accessedRoutes);
-    });
+  async setRoutes({ commit }, permissions) {
+    let accessedRoutes = [];
+    if (permissions.includes("admin")) {
+      accessedRoutes = asyncRoutes;
+    } else {
+      accessedRoutes = await filterAsyncRoutes(...asyncRoutes, permissions);
+    }
+    console.log(accessedRoutes);
+    commit("setRoutes", accessedRoutes);
+    return accessedRoutes;
   },
-  setAllRoutes({ commit }) {
-    return new Promise((resolve) => {
-      getRouterList()
-        .then((res) => {
-          res.data.push({ path: "*", redirect: "/404", hidden: true });
-          let accessRoutes = filterRoutes(res.data);
-          commit("setAllRoutes", accessRoutes);
-          resolve(accessRoutes);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  async setAllRoutes({ commit }) {
+    let { data } = await getRouterList();
+    data.push({ path: "*", redirect: "/404", hidden: true });
+    let accessRoutes = filterAllRoutes(data);
+    commit("setAllRoutes", accessRoutes);
+    return accessRoutes;
   },
   setPartialRoutes({ commit }, accessRoutes) {
-    return new Promise((resolve) => {
-      commit("setPartialRoutes", accessRoutes);
-      resolve(accessRoutes);
-    });
+    commit("setPartialRoutes", accessRoutes);
+    return accessRoutes;
   },
 };
 export default { state, getters, mutations, actions };

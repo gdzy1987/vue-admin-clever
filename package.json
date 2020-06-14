@@ -49,6 +49,7 @@
     "jsonlint": "^1.6.3",
     "jszip-utils": "^0.1.0",
     "lodash": "^4.17.15",
+    "maptalks": "^0.47.2",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "pizzip": "^3.0.6",

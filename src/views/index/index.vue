@@ -1,20 +1,18 @@
 <template>
   <div class="index-container">
     <el-row :gutter="15">
-      <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+      <el-col
+        v-if="nodeEnv !== 'development'"
+        :xs="24"
+        :sm="24"
+        :md="24"
+        :lg="24"
+        :xl="24"
+      >
         <el-alert
-          type="error"
-          title="这是一个抄袭vue-admin-beautiful的框架，只是将原作者框架改为上下布局的方式，喷子手下留情，原版地址在下边"
-          :closable="false"
-          ><a href="https://github.com/chuzhixin/vue-admin-beautiful"
-            >https://github.com/chuzhixin/vue-admin-beautiful</a
-          >
-        </el-alert>
-        <br />
-        <el-alert
-          type="success"
-          title="本框架已在开源框架vue-admin-beautiful基础上升级改造，实现了更人性化的布局和操作方案，并且已获得框架原作者授权，并有幸成为github贡献者，此后vue-admin-clever会同步更新vue-admin-beautiful，致敬vue-admin-beautiful"
-          :closable="false"
+          v-if="noticeList[0]"
+          :title="noticeList[0].title"
+          :closable="noticeList[0].closable"
         >
           <a
             target="_blank"
@@ -150,25 +148,48 @@
               <td>{{ dependencies.axios }}</td>
             </tr>
           </table>
-          <div class="bottom-btn">
-            <el-button type="primary"
-              >我的QQ号（非原作者） 2533447308</el-button
-            >
+          <div v-if="nodeEnv !== 'development'" class="bottom-btn">
             <el-popover placement="top" width="250" trigger="hover">
               <p>
-                谢谢您愿意支持开源，加群获取详细教程，群内提供vue-admin-clever-template基础模板
+                这是一个付费群，谢谢您愿意支持开源，加群获取详细文档，群内提供vue-admin-beautiful-template基础模板
               </p>
               <el-image :src="require('@/assets/ewm.png')"></el-image>
               <a slot="reference" target="_blank">
-                <el-button type="primary">原作者QQ讨论群 972435319</el-button>
+                <el-button type="primary">QQ讨论群 972435319</el-button>
+              </a>
+            </el-popover>
+            <a @click="handleChangeTheme">
+              <el-button type="danger">修改主题和布局</el-button>
+            </a>
+            <a
+              target="_blank"
+              href="https://github.com/chuzhixin/vue-admin-beautiful"
+            >
+              <el-button type="warning">
+                github下载源码点star（实时更新）
+              </el-button>
+            </a>
+            <a
+              target="_blank"
+              href="https://gitee.com/chu1204505056/vue-admin-beautiful"
+            >
+              <el-button type="warning">码云下载源码</el-button>
+            </a>
+            <el-popover placement="top" width="250" trigger="hover">
+              <p>
+                谢谢您愿意支持开源，加群获取详细教程，群内提供vue-admin-beautiful-template基础模板
+              </p>
+              <el-image :src="require('@/assets/ewm.png')"></el-image>
+              <a slot="reference" target="_blank">
+                <el-button type="warning">文档</el-button>
               </a>
             </el-popover>
           </div>
         </el-card>
       </el-col>
-      <el-col :span="24">
+      <el-col v-if="nodeEnv !== 'development'" :span="24">
         <el-alert
-          title="beautiful boys and girls欢迎加入vue-admin-cleverQQ群：972435319，群内提供文档教程，如果你觉得框架一文不值，请勿加群"
+          title="beautiful boys and girls欢迎加入vue-admin-beautifulQQ群：972435319，群内提供文档教程，如果你觉得框架一文不值，请勿加群"
           :closable="false"
         >
         </el-alert>
@@ -193,7 +214,14 @@
           </el-card>
         </app-link>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+      <el-col
+        v-if="nodeEnv !== 'development'"
+        :xs="24"
+        :sm="24"
+        :md="12"
+        :lg="12"
+        :xl="12"
+      >
         <el-card class="card" shadow="never">
           <div slot="header">
             <span>更新日志</span>
@@ -210,7 +238,14 @@
           </el-timeline>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+      <el-col
+        v-if="nodeEnv !== 'development'"
+        :xs="24"
+        :sm="24"
+        :md="12"
+        :lg="12"
+        :xl="12"
+      >
         <el-card shadow="never">
           <div slot="header">
             <span>其他信息</span>
@@ -222,29 +257,16 @@
           >
           </el-alert>
           <br /> -->
-          <el-alert
-            title=" 其实人生改变命运的机会并没有太多，我们并不是不优秀，我们也并不是一无是处，我们也希望驻足山巅被众人仰望， 也许我们
-            缺少的只是一个机会，缺少的只是生命中的导师，我希望这个框架帮助到更多的人，希望有一天，我们面试的时候不再胆怯，希望有一天别人看到的不仅仅是你的努力，还有你的功成名就，出人头地"
-            type="success"
-            :closable="false"
-          >
-          </el-alert>
-          <br />
-          <el-alert
-            :closable="false"
-            title="框架优势：mock数据自动导出无需配置；views，vuex，api支持自动生成；自动fixed问题代码，可以愉快的拥抱eslint；支持stylint自动排序css属性，自动fiexed scss问题样式"
-            type="success"
-          >
-          </el-alert>
-          <br />
-          <el-alert
-            :closable="false"
-            title="鸣谢唐金州、花裤衩、贤心、element-ui、ivew的开源项目给我带来的很多的灵感"
-            type="success"
-          >
-          </el-alert>
-          <br />
-
+          <div v-for="(item, index) in noticeList" :key="index">
+            <el-alert
+              v-if="index !== 0"
+              :title="item.title"
+              :type="item.type"
+              :closable="item.closable"
+            >
+            </el-alert>
+            <br />
+          </div>
           <el-alert :closable="false" :title="userAgent" type="info">
           </el-alert>
           <br />
@@ -259,6 +281,7 @@ import VabChart from "@/plugins/echarts";
 import VabCount from "@/plugins/vabCount";
 import { dependencies, devDependencies } from "../../../package.json";
 import { getList } from "@/api/changeLog";
+import { getNoticeList } from "@/api/notice";
 import { getRepos, getStargazers } from "@/api/github";
 import AppLink from "@/layouts/components/Link";
 export default {
@@ -403,7 +426,7 @@ export default {
             },
             data: [
               {
-                name: "vue-admin-clever",
+                name: "vue-admin-beautiful",
                 value: 15000,
               },
               {
@@ -560,6 +583,7 @@ export default {
       //更新日志
       reverse: true,
       activities: [],
+      noticeList: [],
       //其他信息
       userAgent: navigator.userAgent,
       //卡片图标
@@ -579,7 +603,7 @@ export default {
         {
           icon: "laptop-code",
           title: "源码",
-          link: "https://github.com/chuzhixin/vue-admin-clever",
+          link: "https://github.com/chuzhixin/vue-admin-beautiful",
           color: "#b37feb",
         },
         {
@@ -625,6 +649,9 @@ export default {
       this.$baseMessage(`点击了${e.name},这里可以写跳转`);
     },
     handleZrClick(e) {},
+    handleChangeTheme() {
+      this.$baseEventBus.$emit("theme");
+    },
     fetchData() {
       getList().then((res) => {
         res.data.map((item, index) => {
@@ -633,6 +660,9 @@ export default {
           }
         });
         this.activities = res.data;
+      });
+      getNoticeList().then((res) => {
+        this.noticeList = res.data;
       });
       /* getRepos({
         token: "1061286824f978ea3cf98b7b8ea26fe27ba7cea1",
@@ -651,7 +681,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
 .index-container {
   ::v-deep {
@@ -697,9 +726,7 @@ export default {
       padding: 9px 15px;
       font-size: 14px;
       line-height: 20px;
-      border-color: #e6e6e6;
-      border-style: solid;
-      border-width: 1px;
+      border: 1px solid #e6e6e6;
 
       &:first-child {
         width: 50%;

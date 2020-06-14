@@ -127,7 +127,7 @@ export default {
       justify-content: center; /* 水平居中 */
 
       svg:not(:root) {
-        font-size: 30px;
+        font-size: 35px;
         font-weight: bold;
         color: $base-color-gray;
         text-align: center;
@@ -137,8 +137,8 @@ export default {
       }
 
       .svg-external-icon {
-        width: 30px;
-        height: 30px;
+        width: 35px;
+        height: 35px;
       }
     }
   }

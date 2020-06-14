@@ -1,7 +1,8 @@
 <template>
   <div class="login-container">
     <el-alert
-      title="beautiful boys and girls欢迎加入vue-admin-cleverQQ群：972435319"
+      v-if="nodeEnv !== 'development'"
+      title="beautiful boys and girls欢迎加入vue-admin-beautifulQQ群：972435319"
       type="success"
       :closable="false"
     >
@@ -66,7 +67,7 @@
             :loading="loading"
             class="login-btn"
             type="primary"
-            @click.native.prevent="handleLogin"
+            @click="handleLogin"
             >登录
           </el-button>
         </el-form>
@@ -103,6 +104,7 @@ export default {
       }
     };
     return {
+      nodeEnv: process.env.NODE_ENV,
       title: this.$baseTitle,
       loginForm: {
         userName: "",
@@ -137,41 +139,32 @@ export default {
       immediate: true,
     },
   },
-  created() {},
   mounted() {
     if ("production" !== process.env.NODE_ENV) {
       this.loginForm.userName = "admin";
       this.loginForm.password = "123456";
     }
-    setTimeout(() => {
-      this.animateShow = true;
-    });
   },
   methods: {
     showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
-      } else {
-        this.passwordType = "password";
-      }
+      this.passwordType === "password"
+        ? (this.passwordType = "")
+        : (this.passwordType = "password");
       this.$nextTick(() => {
         this.$refs.password.focus();
       });
     },
-    async handleLogin() {
-      this.$refs.loginForm.validate((valid) => {
+    handleLogin() {
+      this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
           this.loading = true;
-          this.$store
-            .dispatch("user/login", this.loginForm)
-            .then(() => {
-              const routerPath = this.redirect === "/404" ? "/" : this.redirect;
-              this.$router.push({ path: routerPath || "/" }).catch(() => {});
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
+          await this.$store.dispatch("user/login", this.loginForm);
+          const routerPath =
+            this.redirect === "/404" || this.redirect === "/401"
+              ? "/"
+              : this.redirect;
+          this.$router.push({ path: routerPath }).catch((error) => {});
+          this.loading = false;
         } else {
           return false;
         }

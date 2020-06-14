@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper" :class="classObj">
+  <div class="vue-admin-beautiful-wrapper" :class="classObj">
     <div
       class="layout-container-vertical"
       :class="{
@@ -89,7 +89,7 @@ export default {
   overflow: hidden;
 }
 
-.app-wrapper {
+.vue-admin-beautiful-wrapper {
   position: relative;
   width: 100%;
   height: 100%;

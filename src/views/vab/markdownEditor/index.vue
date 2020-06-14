@@ -30,8 +30,8 @@ export default {
   components: { VabMarkdownEditor },
   data() {
     return {
-      value: "# vue-admin-clever",
-      html: '<h1 id="vue-admin-clever">vue-admin-clever</h1>',
+      value: "# vue-admin-beautiful",
+      html: '<h1 id="vue-admin-beautiful">vue-admin-beautiful</h1>',
     };
   },
   methods: {

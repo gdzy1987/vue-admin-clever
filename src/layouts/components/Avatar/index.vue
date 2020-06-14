@@ -1,10 +1,7 @@
 <template>
   <el-dropdown @command="handleCommand">
     <span class="el-dropdown-link">
-      <el-avatar
-        class="user-avatar"
-        :src="require('@/assets/user.gif')"
-      ></el-avatar>
+      <el-avatar class="user-avatar" :src="avatar"></el-avatar>
       <span class="hidden-md-and-down user-name">{{ userName }}</span>
       <i class="hidden-md-and-down el-icon-arrow-down el-icon--right"></i>
     </span>

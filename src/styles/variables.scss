@@ -1,10 +1,10 @@
 @charset "utf-8";
 
-$base-color-default: #009688;
+$base-color-default: #1890ff;
 $base-z-index: 999;
 
-$base-menu-background: #20222a;
-$base-menu-children-background: #16181d;
+$base-menu-background: #001529;
+$base-menu-children-background: #000c17;
 $base-menu-background-active: $base-color-default;
 $base-menu-color: hsla(0, 0%, 100%, 0.95);
 $base-menu-color-active: hsla(0, 0%, 100%, 0.95);
@@ -30,7 +30,6 @@ $base-border-color: #ebeef5;
 $base-form-width: 600px;
 $base-input-height: 32px;
 $base-pagination-height: 28px;
-$base-dialog-title-height: 40px;
 $base-padding: 15px;
 $base-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 $base-font-color: #606266;
@@ -46,7 +45,7 @@ $base-right-content-width-min: calc(100% - #{$base-left-menu-width-min});
   menu-background: $base-menu-background;
   menu-children-background: $base-menu-children-background;
   menu-background-active: $base-menu-background-active;
-  tagviews-background-active: $base-color-blue;
+  tags-bar-background-active: $base-color-blue;
   button-background: $base-color-blue;
   pagination-background-active: $base-color-blue;
 }

@@ -33,16 +33,16 @@
           <div slot="header">
             <span>访问量</span>
           </div>
-          <byui-chart
+          <vab-chart
             :autoresize="true"
-            theme="byui-echarts-theme"
+            theme="vab-echarts-theme"
             :options="fwl"
           />
           <div class="bottom">
             <span
               >日均访问量:
 
-              <byui-count
+              <vab-count
                 :start-val="config1.startVal"
                 :end-val="config1.endVal"
                 :duration="config1.duration"
@@ -60,15 +60,15 @@
           <div slot="header">
             <span>授权数</span>
           </div>
-          <byui-chart
+          <vab-chart
             :autoresize="true"
-            theme="byui-echarts-theme"
+            theme="vab-echarts-theme"
             :options="sqs"
           />
           <div class="bottom">
             <span
               >总授权数:
-              <byui-count
+              <vab-count
                 :start-val="config2.startVal"
                 :end-val="config2.endVal"
                 :duration="config2.duration"
@@ -85,16 +85,16 @@
           <div slot="header">
             <span>词云</span>
           </div>
-          <byui-chart
+          <vab-chart
             :autoresize="true"
-            theme="byui-echarts-theme"
+            theme="vab-echarts-theme"
             :options="cy"
             @zr:click="handleZrClick"
             @click="handleClick"
           />
           <div class="bottom">
             <span
-              >词云数量:<byui-count
+              >词云数量:<vab-count
                 :start-val="config3.startVal"
                 :end-val="config3.endVal"
                 :duration="config3.duration"
@@ -111,9 +111,9 @@
           <div slot="header">
             <span>销售量/签单量</span>
           </div>
-          <byui-chart
+          <vab-chart
             :autoresize="true"
-            theme="byui-echarts-theme"
+            theme="vab-echarts-theme"
             :options="xsl"
           />
         </el-card>
@@ -185,10 +185,10 @@
       >
         <app-link :to="item.link" target="_blank">
           <el-card class="icon-panel" shadow="never">
-            <byui-icon
+            <vab-icon
               :style="{ color: item.color }"
               :icon="['fas', item.icon]"
-            ></byui-icon>
+            ></vab-icon>
             <p>{{ item.title }}</p>
           </el-card>
         </app-link>
@@ -255,8 +255,8 @@
 </template>
 
 <script>
-import ByuiChart from "@/plugins/echarts";
-import ByuiCount from "@/plugins/byuiCount";
+import VabChart from "@/plugins/echarts";
+import VabCount from "@/plugins/vabCount";
 import { dependencies, devDependencies } from "../../../package.json";
 import { getList } from "@/api/changeLog";
 import { getRepos, getStargazers } from "@/api/github";
@@ -264,8 +264,8 @@ import AppLink from "@/layouts/components/Link";
 export default {
   name: "Index",
   components: {
-    ByuiChart,
-    ByuiCount,
+    VabChart,
+    VabCount,
     AppLink,
   },
   data() {
@@ -567,13 +567,13 @@ export default {
         {
           icon: "video",
           title: "视频播放器",
-          link: "/byui/player",
+          link: "/vab/player",
           color: "#ffc069",
         },
         {
           icon: "table",
           title: "表格",
-          link: "/byui/table/comprehensiveTable",
+          link: "/vab/table/comprehensiveTable",
           color: "#5cdbd3",
         },
         {

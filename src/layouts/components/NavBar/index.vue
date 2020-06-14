@@ -21,37 +21,17 @@
               :label="item"
             ></el-tab-pane>
           </el-tabs>
-          <error-log />
-          <byui-screenfull @refresh="refreshSelectedTag"></byui-screenfull>
-          <byui-icon
+          <error-log></error-log>
+          <full-screen-bar @refresh="refreshSelectedTag"></full-screen-bar>
+          <vab-icon
             title="重载路由"
             :pulse="pulse"
             :icon="['fas', 'redo']"
             @click="refreshSelectedTag"
-          />
-          <el-dropdown @command="handleCommand">
-            <span class="el-dropdown-link">
-              <el-avatar
-                class="user-avatar"
-                :src="require('@/assets/user.gif')"
-              ></el-avatar>
-              <span class="user-name">{{ userName }}</span>
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
+          ></vab-icon>
+          <avatar></avatar>
 
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <byui-icon :icon="['fas', 'user']"></byui-icon>
-                个人中心
-              </el-dropdown-item>
-              <el-dropdown-item command="logout" divided>
-                <byui-icon :icon="['fas', 'sign-out-alt']"></byui-icon>
-                退出登录
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-
-          <!--  <byui-icon
+          <!--  <vab-icon
             title="退出系统"
             :icon="['fas', 'sign-out-alt']"
             @click="logout"
@@ -64,14 +44,15 @@
 
 <script>
 import { mapGetters } from "vuex";
-import ErrorLog from "@/components/ErrorLog";
-import ByuiScreenfull from "@/components/ByuiScreenfull";
+
+import { Avatar, FullScreenBar, ErrorLog } from "@/layouts/components";
 import path from "path";
 export default {
   name: "NavBar",
   components: {
     ErrorLog,
-    ByuiScreenfull,
+    FullScreenBar,
+    Avatar,
   },
   data() {
     return {
@@ -193,27 +174,6 @@ export default {
     justify-content: flex-end;
     height: 50px;
 
-    .user-avatar {
-      margin-right: 5px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .user-name {
-      position: relative;
-      top: -14px;
-      margin-right: 35px;
-      margin-left: 5px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .user-name + i {
-      position: absolute;
-      top: 16px;
-      right: 15px;
-    }
-
     ::v-deep {
       .el-tabs {
         margin-top: 15px;
@@ -227,6 +187,27 @@ export default {
 
       .el-tabs__nav-wrap::after {
         height: 0;
+      }
+
+      .user-avatar {
+        margin-right: 5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .user-name {
+        position: relative;
+        top: -14px;
+        margin-right: 35px;
+        margin-left: 5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .user-name + i {
+        position: absolute;
+        top: 16px;
+        right: 15px;
       }
 
       svg {
@@ -253,12 +234,5 @@ export default {
       }
     }
   }
-}
-</style>
-<style>
-.el-dropdown-menu--small .el-dropdown-menu__item {
-  padding: 0 15px;
-  font-size: 13px;
-  line-height: 36px !important;
 }
 </style>

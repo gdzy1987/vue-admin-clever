@@ -49,7 +49,7 @@ export const asyncRoutes = [
   },
   {
     path: "/image",
-    component: () => import("@/views/byui/word/image"),
+    component: () => import("@/views/vab/word/image"),
     hidden: true,
   },
   /* {
@@ -111,17 +111,17 @@ export const asyncRoutes = [
     ],
   },
   {
-    path: "/byui",
+    path: "/vab",
     component: Layout,
     redirect: "noRedirect",
-    name: "Byui",
+    name: "Vab",
     meta: { title: "组件", icon: "cloud" },
     alwaysShow: true,
     children: [
       {
         path: "permission",
         name: "Permission",
-        component: () => import("@/views/byui/permission/index"),
+        component: () => import("@/views/vab/permission/index"),
         meta: {
           title: "权限控制",
           permissions: ["admin", "editor", "test"],
@@ -129,7 +129,7 @@ export const asyncRoutes = [
       },
       {
         path: "menu1",
-        component: () => import("@/views/byui/nested/menu1/index"),
+        component: () => import("@/views/vab/nested/menu1/index"),
         name: "Menu1",
         meta: {
           title: "嵌套路由 1",
@@ -139,7 +139,7 @@ export const asyncRoutes = [
         children: [
           {
             path: "menu1-1",
-            component: () => import("@/views/byui/nested/menu1/menu1-1/index"),
+            component: () => import("@/views/vab/nested/menu1/menu1-1/index"),
             name: "Menu1-1",
             meta: { title: "嵌套路由 1-1" },
             alwaysShow: true,
@@ -147,7 +147,7 @@ export const asyncRoutes = [
               {
                 path: "menu1-1-1",
                 component: () =>
-                  import("@/views/byui/nested/menu1/menu1-1/menu1-1-1/index"),
+                  import("@/views/vab/nested/menu1/menu1-1/menu1-1-1/index"),
                 name: "Menu1-1-1",
                 meta: { title: "嵌套路由 1-1-1" },
               },
@@ -158,25 +158,25 @@ export const asyncRoutes = [
       {
         path: "verify",
         name: "Verify",
-        component: () => import("@/views/byui/verify/index"),
+        component: () => import("@/views/vab/verify/index"),
         meta: { title: "验证码", permissions: ["admin"] },
       },
       {
         path: "icon",
         name: "Icon",
-        component: () => import("@/views/byui/icon/index"),
+        component: () => import("@/views/vab/icon/index"),
         meta: { title: "常规图标", permissions: ["admin"] },
       },
       {
         path: "remixIcon",
         name: "RemixIcon",
-        component: () => import("@/views/byui/icon/remixIcon"),
+        component: () => import("@/views/vab/icon/remixIcon"),
         meta: { title: "小清新图标", permissions: ["admin"] },
       },
       {
         path: "colorfulIcon",
         name: "ColorfulIcon",
-        component: () => import("@/views/byui/icon/colorfulIcon"),
+        component: () => import("@/views/vab/icon/colorfulIcon"),
         meta: { title: "多彩图标", permissions: ["admin"] },
       },
       {
@@ -192,13 +192,13 @@ export const asyncRoutes = [
           {
             path: "comprehensiveTable",
             name: "ComprehensiveTable",
-            component: () => import("@/views/byui/table/index"),
+            component: () => import("@/views/vab/table/index"),
             meta: { title: "综合表格", permissions: ["admin"] },
           },
           {
             path: "inlineEditTable",
             name: "InlineEditTable",
-            component: () => import("@/views/byui/table/inlineEditTable"),
+            component: () => import("@/views/vab/table/inlineEditTable"),
             meta: { title: "行内编辑", permissions: ["admin"] },
           },
         ],
@@ -206,37 +206,37 @@ export const asyncRoutes = [
       {
         path: "form",
         name: "Form",
-        component: () => import("@/views/byui/form/index"),
+        component: () => import("@/views/vab/form/index"),
         meta: { title: "表单", permissions: ["admin"] },
       },
       {
         path: "element",
         name: "Element",
-        component: () => import("@/views/byui/element/index"),
+        component: () => import("@/views/vab/element/index"),
         meta: { title: "常用组件", permissions: ["admin"] },
       },
       {
         path: "tree",
         name: "Tree",
-        component: () => import("@/views/byui/tree/index"),
+        component: () => import("@/views/vab/tree/index"),
         meta: { title: "树", permissions: ["admin"] },
       },
       {
         path: "card",
         name: "Card",
-        component: () => import("@/views/byui/card/index"),
+        component: () => import("@/views/vab/card/index"),
         meta: { title: "卡片", permissions: ["admin"] },
       },
       {
         path: "magnifier",
         name: "Magnifier",
-        component: () => import("@/views/byui/magnifier/index"),
+        component: () => import("@/views/vab/magnifier/index"),
         meta: { title: "放大镜", permissions: ["admin"] },
       },
       {
         path: "waterfall",
         name: "Waterfall",
-        component: () => import("@/views/byui/waterfall/index"),
+        component: () => import("@/views/vab/waterfall/index"),
         meta: {
           title: "瀑布屏",
           noKeepAlive: true,
@@ -246,81 +246,81 @@ export const asyncRoutes = [
       {
         path: "echarts",
         name: "Echarts",
-        component: () => import("@/views/byui/echarts/index"),
+        component: () => import("@/views/vab/echarts/index"),
         meta: { title: "图表", permissions: ["admin"] },
       },
 
       {
         path: "loading",
         name: "Loading",
-        component: () => import("@/views/byui/loading/index"),
+        component: () => import("@/views/vab/loading/index"),
         meta: { title: "loading", permissions: ["admin"] },
       },
       {
         path: "player",
         name: "Player",
-        component: () => import("@/views/byui/player/index"),
+        component: () => import("@/views/vab/player/index"),
         meta: { title: "视频播放器", permissions: ["admin"] },
       },
       {
         path: "markdownEditor",
         name: "MarkdownEditor",
-        component: () => import("@/views/byui/markdownEditor/index"),
+        component: () => import("@/views/vab/markdownEditor/index"),
         meta: { title: "markdown编辑器", permissions: ["admin"] },
       },
       {
         path: "editor",
         name: "Editor",
-        component: () => import("@/views/byui/editor/index"),
+        component: () => import("@/views/vab/editor/index"),
         meta: { title: "富文本编辑器", permissions: ["admin"] },
       },
       {
         path: "qrCode",
         name: "QrCode",
-        component: () => import("@/views/byui/qrCode/index"),
+        component: () => import("@/views/vab/qrCode/index"),
         meta: { title: "二维码", permissions: ["admin"] },
       },
       {
         path: "backToTop",
         name: "BackToTop",
-        component: () => import("@/views/byui/backToTop/index"),
+        component: () => import("@/views/vab/backToTop/index"),
         meta: { title: "返回顶部", permissions: ["admin"] },
       },
       {
         path: "lodash",
         name: "Lodash",
-        component: () => import("@/views/byui/lodash/index"),
+        component: () => import("@/views/vab/lodash/index"),
         meta: { title: "lodash", permissions: ["admin"] },
       },
       {
         path: "imgComparison",
         name: "ImgComparison",
-        component: () => import("@/views/byui/imgComparison/index"),
+        component: () => import("@/views/vab/imgComparison/index"),
         meta: { title: "图像拖拽比对", permissions: ["admin"] },
       },
       {
         path: "codeGenerator",
         name: "CodeGenerator",
-        component: () => import("@/views/byui/codeGenerator/index"),
+        component: () => import("@/views/vab/codeGenerator/index"),
         meta: { title: "代码生成机", permissions: ["admin"] },
       },
       {
         path: "markdown",
         name: "Markdown",
-        component: () => import("@/views/byui/markdown/index"),
+        component: () => import("@/views/vab/markdown/index"),
         meta: { title: "markdown阅读器", permissions: ["admin"] },
       },
       {
         path: "smallComponents",
         name: "SmallComponents",
-        component: () => import("@/views/byui/smallComponents/index"),
+        component: () => import("@/views/vab/smallComponents/index"),
         meta: { title: "小组件", permissions: ["admin"] },
       },
 
       {
         path: "upload",
         name: "Upload",
-        component: () => import("@/views/byui/upload/index"),
+        component: () => import("@/views/vab/upload/index"),
         meta: { title: "上传", permissions: ["admin"] },
       },
       {
@@ -334,25 +334,25 @@ export const asyncRoutes = [
         children: [
           {
             path: "export-excel",
-            component: () => import("@/views/byui/excel/export-excel"),
+            component: () => import("@/views/vab/excel/export-excel"),
             name: "ExportExcel",
             meta: { title: "导出Excel" },
           },
           {
             path: "export-selected-excel",
-            component: () => import("@/views/byui/excel/select-excel"),
+            component: () => import("@/views/vab/excel/select-excel"),
             name: "SelectExcel",
             meta: { title: "导出选中行" },
           },
           {
             path: "export-merge-header",
-            component: () => import("@/views/byui/excel/merge-header"),
+            component: () => import("@/views/vab/excel/merge-header"),
             name: "MergeHeader",
             meta: { title: "导出合并" },
           },
           {
             path: "upload-excel",
-            component: () => import("@/views/byui/excel/upload-excel"),
+            component: () => import("@/views/vab/excel/upload-excel"),
             name: "UploadExcel",
             meta: { title: "上传Excel" },
           },
@@ -361,31 +361,31 @@ export const asyncRoutes = [
       {
         path: "sticky",
         name: "Sticky",
-        component: () => import("@/views/byui/sticky/index"),
+        component: () => import("@/views/vab/sticky/index"),
         meta: { title: "sticky吸附", permissions: ["admin"] },
       },
       {
         path: "log",
         name: "Log",
-        component: () => import("@/views/byui/errorLog/index"),
+        component: () => import("@/views/vab/errorLog/index"),
         meta: { title: "错误日志模拟", permissions: ["admin"] },
       },
       {
         path: "news",
         name: "News",
-        component: () => import("@/views/byui/news/index"),
+        component: () => import("@/views/vab/news/index"),
         meta: { title: "新闻（可能存在跨域）", permissions: ["admin"] },
       },
       {
         path: "word",
         name: "Word",
-        component: () => import("@/views/byui/word/index"),
+        component: () => import("@/views/vab/word/index"),
         meta: { title: "word下载", permissions: ["admin"] },
       },
       {
         path: "more",
         name: "More",
-        component: () => import("@/views/byui/more/index"),
+        component: () => import("@/views/vab/more/index"),
         meta: { title: "更多组件", permissions: ["admin"] },
       },
     ],

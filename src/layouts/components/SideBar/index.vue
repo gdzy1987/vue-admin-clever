@@ -26,7 +26,7 @@
 <script>
 import path from "path";
 import Logo from "@/layouts/components/Logo";
-import SideBarItem from "zx-side-bar/SideBarItem";
+import SideBarItem from "zx-layouts/zx-side-bar/components/SideBarItem";
 import variables from "@/styles/variables.scss";
 import { mapGetters } from "vuex";
 

@@ -1,6 +1,6 @@
 ## 公告
 
-本人已获得 vue-admin-beautiful 原作者授权，并为原作者免费提供了服务器，每天成功抵御 2000 余次恶意攻击，成为 github 贡献者，并在此基础上实现了大幅度优化改进，实现了更人性化的横纵布局方式，致敬 vue-admin-beautiful，原作者加油，麻烦恶意差评得人你要点脸，抄袭你拿出证据，都是 element-ui 当然源码会相似，我甚至觉得你连项目你都跑不起来吧，希望有一天你也做一个 10 块钱大家都能用的框架，作者都停更了你还在这里哔哔，见不得别人好的渣渣，框架开源免费，不代表谁都可以用，你菜请你先去提升自己，连个 v-for 你都不会你赖别人不给你解答问题
+本人已获得 vue-admin-beautiful 原作者授权，并为原作者免费提供了服务器，每天成功抵御 2000 余次恶意攻击，成为 github 贡献者，并在此基础上实现了大幅度优化改进，实现了更人性化的横纵布局方式，致敬 vue-admin-beautiful
 
 ## 演示地址
 
@@ -41,7 +41,7 @@ cnpm run serve
 ```js
 module.exports = {
   title: "vue-admin-beautiful", //标题
-  abbreviation: "byui", //简写
+  abbreviation: "vab", //简写
   devPort: "80", //开发环境端口号
   version: "V1.0", //版本号
   copyright: process.env.VUE_APP_AUTHOR,

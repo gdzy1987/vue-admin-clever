@@ -2,7 +2,7 @@ module.exports = {
   //标题
   title: "vue-admin-clever",
   //简写
-  abbreviation: "byui",
+  abbreviation: "vab",
   //开发环境端口号
   devPort: "80",
   //版本号

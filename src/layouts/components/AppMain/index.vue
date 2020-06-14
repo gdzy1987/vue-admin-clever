@@ -1,31 +1,24 @@
 <template>
   <section class="app-main-container">
     <github-corner v-if="nodeEnv !== 'development'"></github-corner>
-    <byui-keel v-if="show" style="margin: 15px;">
-      <byui-keel-heading :img="true" />
-      <byui-keel-text :lines="7" />
-      <byui-keel-heading :img="true" />
-      <byui-keel-text :lines="6" />
-      <byui-keel-heading :img="true" />
-      <byui-keel-text :lines="8" />
-    </byui-keel>
+    <vab-keel v-if="show" style="margin: 15px;">
+      <vab-keel-heading :img="true" />
+      <vab-keel-text :lines="7" />
+      <vab-keel-heading :img="true" />
+      <vab-keel-text :lines="6" />
+      <vab-keel-heading :img="true" />
+      <vab-keel-text :lines="8" />
+    </vab-keel>
     <transition mode="out-in" name="fade-transform">
       <keep-alive :include="cachedRoutes" :max="10">
-        <router-view :key="key" style="min-height: 78vh;" />
+        <router-view :key="key" style="min-height: 82vh;" />
       </keep-alive>
     </transition>
-    <footer class="footer-copyright">
-      Copyright
-      <byui-icon :icon="['fas', 'copyright']"></byui-icon>
-      {{ fullYear }} {{ copyright }}
-      <br />
-      我的目标不是做一名优秀的前端leader，我的目标是帮助到更多优秀的前端leader，停留在这句话的你一定会是或者已经是其中最优秀的那一个
-    </footer>
   </section>
 </template>
 
 <script>
-import { ByuiKeel, ByuiKeelHeading, ByuiKeelText } from "@/plugins/byuiKeel";
+import { VabKeel, VabKeelHeading, VabKeelText } from "@/plugins/vabKeel";
 import { mapGetters } from "vuex";
 import GithubCorner from "@/components/GithubCorner";
 import { copyright } from "@/config/settings";
@@ -33,9 +26,9 @@ import { copyright } from "@/config/settings";
 export default {
   name: "AppMain",
   components: {
-    ByuiKeel,
-    ByuiKeelHeading,
-    ByuiKeelText,
+    VabKeel,
+    VabKeelHeading,
+    VabKeelText,
     GithubCorner,
   },
   data() {

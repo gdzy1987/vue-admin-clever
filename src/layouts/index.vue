@@ -1,31 +1,6 @@
 <template>
   <div class="app-wrapper" :class="classObj">
     <div
-      v-if="'horizontal' === layout"
-      class="layout-container-horizontal"
-      :class="{
-        fixed: header === 'fixed',
-        'no-tags-bar': tagsBar === 'false' || tagsBar === false,
-      }"
-    >
-      <div :class="header === 'fixed' ? 'fixed-header' : ''">
-        <top-bar />
-        <div
-          v-if="tagsBar === 'true' || tagsBar === true"
-          :class="{ 'tag-view-show': tagsBar }"
-        >
-          <byui-main>
-            <tags-bar />
-          </byui-main>
-        </div>
-      </div>
-      <byui-main class="main-padding">
-        <nav-bar />
-        <app-main />
-      </byui-main>
-    </div>
-    <div
-      v-else
       class="layout-container-vertical"
       :class="{
         fixed: header === 'fixed',
@@ -38,22 +13,20 @@
         @click="handleFoldSideBar"
       />
       <side-bar />
-      <byui-main :class="collapse ? 'is-collapse-main' : ''">
+      <div class="vab-main" :class="collapse ? 'is-collapse-main' : ''">
         <div :class="header === 'fixed' ? 'fixed-header' : ''">
           <nav-bar />
           <tags-bar v-if="tagsBar === 'true' || tagsBar === true" />
         </div>
         <app-main />
-      </byui-main>
+      </div>
     </div>
-    <byui-back-to-top transition-name="fade" />
+    <back-to-top transition-name="fade"></back-to-top>
   </div>
 </template>
 
 <script>
-import { AppMain, NavBar, SideBar, TagsBar, TopBar } from "./components";
-import ByuiMain from "@/components/ByuiMain";
-import ByuiBackToTop from "@/components/ByuiBackToTop";
+import { AppMain, BackToTop, NavBar, SideBar, TagsBar } from "./components";
 import { mapGetters } from "vuex";
 import { tokenName } from "@/config/settings";
 import Media from "zx-media/mixin/Media";
@@ -61,13 +34,11 @@ import Media from "zx-media/mixin/Media";
 export default {
   name: "Layout",
   components: {
-    TopBar,
     NavBar,
     SideBar,
     AppMain,
-    ByuiMain,
     TagsBar,
-    ByuiBackToTop,
+    BackToTop,
   },
   mixins: [Media],
   data() {
@@ -123,49 +94,6 @@ export default {
   width: 100%;
   height: 100%;
 
-  .layout-container-horizontal {
-    position: relative;
-
-    &.fixed {
-      padding-top: 96px;
-    }
-
-    &.fixed.no-tags-bar {
-      padding-top: 56px;
-    }
-
-    ::v-deep {
-      .byui-main {
-        width: 88%;
-      }
-
-      .fixed-header {
-        @include fix-header;
-      }
-
-      .tag-view-show {
-        background: $base-color-white;
-        box-shadow: $base-box-shadow;
-      }
-
-      .nav-bar-container {
-        .fold-unfold {
-          display: none;
-        }
-      }
-
-      .main-padding {
-        margin-top: 15px;
-        margin-bottom: 15px;
-
-        .app-main-container {
-          min-height: calc(100vh - 180px);
-          background: $base-color-white;
-        }
-      }
-    }
-  }
-
   .layout-container-vertical {
     position: relative;
 
@@ -191,7 +119,7 @@ export default {
       padding-top: 56px;
     }
 
-    .byui-main {
+    .vab-main {
       position: relative;
       min-height: 100%;
       margin-left: $base-left-menu-width;
@@ -255,7 +183,7 @@ export default {
           width: 0;
         }
 
-        .byui-main {
+        .vab-main {
           width: 100%;
           margin-left: 0;
 
@@ -266,7 +194,7 @@ export default {
         }
       }
 
-      .byui-main {
+      .vab-main {
         .fixed-header {
           left: 0 !important;
           width: 100% !important;

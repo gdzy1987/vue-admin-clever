@@ -1,34 +1,7 @@
 <template>
   <div class="index-container">
     <el-row :gutter="15">
-      <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
-        <el-card shadow="never">
-          <div slot="header">
-            <span>访问量</span>
-          </div>
-          <vab-chart
-            :autoresize="true"
-            theme="vab-echarts-theme"
-            :options="fwl"
-          />
-          <div class="bottom">
-            <span
-              >日均访问量:
-
-              <vab-count
-                :start-val="config1.startVal"
-                :end-val="config1.endVal"
-                :duration="config1.duration"
-                :separator="config1.separator"
-                :prefix="config1.prefix"
-                :suffix="config1.suffix"
-                :decimals="config1.decimals"
-              />
-            </span>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
         <el-card shadow="never">
           <div slot="header">
             <span>授权数</span>
@@ -56,10 +29,23 @@
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <el-card shadow="never">
           <div slot="header">
-            <span>广告位</span>
+            <span>友情链接</span>
           </div>
-          <el-carousel height="150px">
-            <el-carousel-item v-for="item in 4" :key="item">
+          <el-carousel height="282px">
+            <el-carousel-item>
+              <img
+                style="width: 100%; height: 282px;"
+                src="@/assets/uView.png"
+                alt=""
+              />
+              <h3 class="small">{{ item }}</h3>
+            </el-carousel-item>
+            <el-carousel-item>
+              <img
+                style="width: 100%; height: 282px;"
+                src="@/assets/vab.png"
+                alt=""
+              />
               <h3 class="small">{{ item }}</h3>
             </el-carousel-item>
           </el-carousel>
@@ -119,7 +105,8 @@
                 <el-button type="primary">付费群 972435319</el-button>
               </a>
             </el-popover>
-            <el-button type="primary">免费群 685641057 </el-button>
+            <el-button type="primary">vue讨论群 685641057 </el-button>
+            <el-button type="primary">uView讨论群 1042987248 </el-button>
             <a @click="handleChangeTheme">
               <el-button type="danger">修改主题和布局</el-button>
             </a>
@@ -132,12 +119,6 @@
               </el-button>
             </a>
           </div>
-        </el-card>
-      </el-col>
-      <el-col>
-        <el-card class="card" shadow="never">
-          <div slot="header">友情链接</div>
-          <el-link href="https://element.eleme.io" type="primary">ivew</el-link>
         </el-card>
       </el-col>
     </el-row>
@@ -553,7 +534,7 @@ export default {
     .el-card__body {
       .echarts {
         width: 100%;
-        height: 140px;
+        height: 240px;
       }
     }
   }

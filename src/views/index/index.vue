@@ -33,20 +33,24 @@
           </div>
           <el-carousel height="282px">
             <el-carousel-item>
-              <img
-                style="width: 100%; height: 282px;"
-                src="@/assets/uView.png"
-                alt=""
-              />
-              <h3 class="small">{{ item }}</h3>
+              <a href="https://uviewui.com/" target="_blank">
+                <img
+                  style="width: 100%; height: 282px;"
+                  src="@/assets/uView.png"
+                  alt=""
+              /></a>
             </el-carousel-item>
             <el-carousel-item>
-              <img
-                style="width: 100%; height: 282px;"
-                src="@/assets/vab.png"
-                alt=""
-              />
-              <h3 class="small">{{ item }}</h3>
+              <a
+                href="https://github.com/chuzhixin/vue-admin-beautiful"
+                target="_blank"
+              >
+                <img
+                  style="width: 100%; height: 282px;"
+                  src="@/assets/vab.png"
+                  alt=""
+                />
+              </a>
             </el-carousel-item>
           </el-carousel>
         </el-card>

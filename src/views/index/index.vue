@@ -1,31 +1,6 @@
 <template>
   <div class="index-container">
     <el-row :gutter="15">
-      <el-col
-        v-if="nodeEnv !== 'development'"
-        :xs="24"
-        :sm="24"
-        :md="24"
-        :lg="24"
-        :xl="24"
-      >
-        <el-alert
-          v-if="noticeList[0]"
-          :title="noticeList[0].title"
-          :closable="noticeList[0].closable"
-        >
-          <a
-            target="_blank"
-            href="https://github.com/chuzhixin/vue-admin-beautiful"
-          >
-            <img
-              style="height: 100%;"
-              src="https://img.shields.io/github/stars/chuzhixin/vue-admin-beautiful?style=social"
-            />
-          </a>
-        </el-alert>
-        <br />
-      </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
         <el-card shadow="never">
           <div slot="header">
@@ -81,27 +56,13 @@
       <el-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
         <el-card shadow="never">
           <div slot="header">
-            <span>词云</span>
+            <span>广告位</span>
           </div>
-          <vab-chart
-            :autoresize="true"
-            theme="vab-echarts-theme"
-            :options="cy"
-            @zr:click="handleZrClick"
-            @click="handleClick"
-          />
-          <div class="bottom">
-            <span
-              >词云数量:<vab-count
-                :start-val="config3.startVal"
-                :end-val="config3.endVal"
-                :duration="config3.duration"
-                :separator="config3.separator"
-                :prefix="config3.prefix"
-                :suffix="config3.suffix"
-                :decimals="config3.decimals"
-            /></span>
-          </div>
+          <el-carousel height="150px">
+            <el-carousel-item v-for="item in 4" :key="item">
+              <h3 class="small">{{ item }}</h3>
+            </el-carousel-item>
+          </el-carousel>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
@@ -148,16 +109,17 @@
               <td>{{ dependencies.axios }}</td>
             </tr>
           </table>
-          <div v-if="nodeEnv !== 'development'" class="bottom-btn">
+          <div class="bottom-btn">
             <el-popover placement="top" width="250" trigger="hover">
               <p>
-                这是一个付费群，谢谢您愿意支持开源，加群获取详细文档，群内提供vue-admin-beautiful-template基础模板
+                付费群
               </p>
               <el-image :src="require('@/assets/ewm.png')"></el-image>
               <a slot="reference" target="_blank">
-                <el-button type="primary">QQ讨论群 972435319</el-button>
+                <el-button type="primary">付费群 972435319</el-button>
               </a>
             </el-popover>
+            <el-button type="primary">免费群 685641057 </el-button>
             <a @click="handleChangeTheme">
               <el-button type="danger">修改主题和布局</el-button>
             </a>
@@ -165,111 +127,17 @@
               target="_blank"
               href="https://github.com/chuzhixin/vue-admin-beautiful"
             >
-              <el-button type="warning">
-                github下载源码点star（实时更新）
+              <el-button type="danger">
+                本项目基于github开源项目修改,点击这里跳转到原项目
               </el-button>
             </a>
-            <a
-              target="_blank"
-              href="https://gitee.com/chu1204505056/vue-admin-beautiful"
-            >
-              <el-button type="warning">码云下载源码</el-button>
-            </a>
-            <el-popover placement="top" width="250" trigger="hover">
-              <p>
-                谢谢您愿意支持开源，加群获取详细教程，群内提供vue-admin-beautiful-template基础模板
-              </p>
-              <el-image :src="require('@/assets/ewm.png')"></el-image>
-              <a slot="reference" target="_blank">
-                <el-button type="warning">文档</el-button>
-              </a>
-            </el-popover>
           </div>
         </el-card>
       </el-col>
-      <el-col v-if="nodeEnv !== 'development'" :span="24">
-        <el-alert
-          title="beautiful boys and girls欢迎加入vue-admin-beautifulQQ群：972435319，群内提供文档教程，如果你觉得框架一文不值，请勿加群"
-          :closable="false"
-        >
-        </el-alert>
-        <br />
-      </el-col>
-      <el-col
-        v-for="(item, index) in iconList"
-        :key="index"
-        :xs="12"
-        :sm="6"
-        :md="3"
-        :lg="3"
-        :xl="3"
-      >
-        <app-link :to="item.link" target="_blank">
-          <el-card class="icon-panel" shadow="never">
-            <vab-icon
-              :style="{ color: item.color }"
-              :icon="['fas', item.icon]"
-            ></vab-icon>
-            <p>{{ item.title }}</p>
-          </el-card>
-        </app-link>
-      </el-col>
-      <el-col
-        v-if="nodeEnv !== 'development'"
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="12"
-        :xl="12"
-      >
+      <el-col>
         <el-card class="card" shadow="never">
-          <div slot="header">
-            <span>更新日志</span>
-          </div>
-          <el-timeline :reverse="reverse">
-            <el-timeline-item
-              v-for="(activity, index) in activities"
-              :key="index"
-              :timestamp="activity.timestamp"
-              :color="activity.color"
-            >
-              {{ activity.content }}
-            </el-timeline-item>
-          </el-timeline>
-        </el-card>
-      </el-col>
-      <el-col
-        v-if="nodeEnv !== 'development'"
-        :xs="24"
-        :sm="24"
-        :md="12"
-        :lg="12"
-        :xl="12"
-      >
-        <el-card shadow="never">
-          <div slot="header">
-            <span>其他信息</span>
-          </div>
-          <!--  <el-alert
-            :closable="false"
-            title="2020年5月12日，不同寻常的一天，汶川大地震的12周年，被社区一名叫做812770127@qq.com的网友骂的狗血淋头，说这是一个抄袭的项目，这是一个一点技术含量都没有的项目，没关系，我把这段话一直留在这里，总有一天你会看到这个你曾经不屑一顾的框架发展壮大，谢谢你的嘲讽让我变得强大"
-            type="error"
-          >
-          </el-alert>
-          <br /> -->
-          <div v-for="(item, index) in noticeList" :key="index">
-            <el-alert
-              v-if="index !== 0"
-              :title="item.title"
-              :type="item.type"
-              :closable="item.closable"
-            >
-            </el-alert>
-            <br />
-          </div>
-          <el-alert :closable="false" :title="userAgent" type="info">
-          </el-alert>
-          <br />
+          <div slot="header">友情链接</div>
+          <el-link href="https://element.eleme.io" type="primary">ivew</el-link>
         </el-card>
       </el-col>
     </el-row>
@@ -283,13 +151,11 @@ import { dependencies, devDependencies } from "../../../package.json";
 import { getList } from "@/api/changeLog";
 import { getNoticeList } from "@/api/notice";
 import { getRepos, getStargazers } from "@/api/github";
-import AppLink from "@/layouts/components/Link";
 export default {
   name: "Index",
   components: {
     VabChart,
     VabCount,
-    AppLink,
   },
   data() {
     return {

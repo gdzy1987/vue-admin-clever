@@ -1,6 +1,6 @@
 module.exports = {
   //标题
-  title: "vue-admin-clever",
+  title: "cleverAdmin",
   //简写
   abbreviation: "vab",
   //开发环境端口号

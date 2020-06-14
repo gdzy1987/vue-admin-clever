@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "test") {
 Vue.config.productionTip = false;
 
 new Vue({
-  el: "#vue-admin-clever",
+  el: "#vue-admin-beautiful",
   router,
   store,
   render: (h) => h(App),

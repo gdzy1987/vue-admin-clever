@@ -10,12 +10,12 @@
       :default-active="activeMenu"
       :collapse="collapse"
       :collapse-transition="false"
-      :default-openeds="defaultOpen"
-      unique-opened
+      :default-openeds="defaultOpens"
+      :unique-opened="uniqueOpened"
       mode="vertical"
     >
       <side-bar-item
-        v-for="route in partialRoutes"
+        v-for="route in routes"
         :key="route.path"
         :base-path="route.path"
         :item="route"
@@ -24,40 +24,29 @@
   </el-scrollbar>
 </template>
 <script>
-import path from "path";
 import Logo from "@/layouts/components/Logo";
 import SideBarItem from "zx-layouts/zx-side-bar/components/SideBarItem";
 import variables from "@/styles/variables.scss";
 import { mapGetters } from "vuex";
+import { defaultOopeneds, uniqueOpened } from "@/config/settings";
 
 export default {
   name: "SideBar",
   components: { SideBarItem, Logo },
   data() {
-    return {};
+    return {
+      uniqueOpened,
+    };
   },
   computed: {
     ...mapGetters({
       collapse: "settings/collapse",
-      partialRoutes: "permission/partialRoutes",
+      routes: "permission/partialRoutes",
     }),
-    defaultOpen() {
+    defaultOpens() {
       if (this.collapse) {
       }
-      let arr = this.partialRoutes.map((item) => {
-        return path.resolve(item.path);
-      });
-      /*只默认展开除了首页,登录,404,重定向以外的第一级*/
-      arr = this.$baseLodash.pull(
-        arr,
-        "/",
-        "/!*",
-        "/login",
-        "/404",
-        "/401",
-        "/redirect"
-      );
-      return arr;
+      return defaultOopeneds;
     },
     activeMenu() {
       const route = this.$route;
@@ -74,6 +63,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@mixin active {
+  &:hover {
+    color: $base-color-white !important;
+    background-color: $base-menu-background-active !important;
+  }
+
+  &.is-active {
+    color: $base-color-white !important;
+    background-color: $base-menu-background-active !important;
+  }
+}
+
 .side-bar-container {
   position: fixed;
   top: 0;
@@ -108,26 +109,20 @@ export default {
       line-height: 46px !important;
       text-overflow: ellipsis;
       white-space: nowrap;
-
-      &:hover {
-        color: $base-color-white !important;
-        background-color: $base-menu-background-active !important;
-      }
-
-      &.is-active {
-        color: $base-color-white !important;
-        background-color: $base-menu-background-active !important;
-      }
+      @include active;
     }
 
     .nest-menu {
-      [class*="menu"] {
+      .el-menu-item {
         background-color: $base-menu-children-background !important;
 
-        &.is-active {
-          color: $base-color-white !important;
-          background-color: $base-menu-background-active !important;
-        }
+        @include active;
+      }
+
+      .el-submenu .el-menu-item {
+        background-color: $base-menu-children-background !important;
+
+        @include active;
       }
     }
   }

@@ -41,7 +41,7 @@ export default {
   computed: {
     ...mapGetters({
       collapse: "settings/collapse",
-      routes: "permission/partialRoutes",
+      routes: "routes/partialRoutes",
     }),
     defaultOpens() {
       if (this.collapse) {
@@ -109,6 +109,7 @@ export default {
       line-height: 46px !important;
       text-overflow: ellipsis;
       white-space: nowrap;
+
       @include active;
     }
 

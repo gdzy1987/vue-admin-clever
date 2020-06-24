@@ -1,3 +1,8 @@
+/**
+ * @copyright chuzhixin 1204505056@qq.com
+ * @description 登录、获取用户信息、退出登录、清除accessToken逻辑，不建议修改
+ */
+
 import Vue from "vue";
 import { getInfo, login, logout } from "@/api/user";
 import {
@@ -67,7 +72,7 @@ const actions = {
       return false;
     }
     let { permissions, userName, avatar } = data;
-    if (permissions && userName && avatar) {
+    if (permissions && userName) {
       commit("setPermissions", permissions);
       commit("setUserName", userName);
       commit("setAvatar", avatar);

@@ -1,7 +1,7 @@
 <template>
   <section class="app-main-container">
     <github-corner v-if="nodeEnv !== 'development'"></github-corner>
-    <vab-keel v-if="show" style="margin: 15px;">
+    <vab-keel v-if="show && skeleton" style="margin: 15px;">
       <vab-keel-heading :img="true" />
       <vab-keel-text :lines="7" />
       <vab-keel-heading :img="true" />
@@ -10,10 +10,15 @@
       <vab-keel-text :lines="8" />
     </vab-keel>
     <transition mode="out-in" name="fade-transform">
-      <keep-alive :include="cachedRoutes" :max="10">
-        <router-view :key="key" style="min-height: 82vh;" />
+      <keep-alive v-if="routerView" :include="cachedRoutes" :max="10">
+        <router-view :key="key" style="min-height: 80.6vh;" />
       </keep-alive>
     </transition>
+    <footer class="footer-copyright">
+      Copyright
+      <vab-icon :icon="['fas', 'copyright']"></vab-icon>
+      {{ fullYear }} {{ copyright }}
+    </footer>
   </section>
 </template>
 
@@ -37,41 +42,70 @@ export default {
       nodeEnv: process.env.NODE_ENV,
       fullYear: new Date().getFullYear(),
       copyright,
+      routerView: true,
+      skeleton: this._skeleton,
     };
   },
   computed: {
     ...mapGetters({
-      cachedRoutes: "tagsBar/cachedRoutes",
+      visitedRoutes: "tagsBar/visitedRoutes",
       device: "settings/device",
+      _skeleton: "settings/skeleton",
     }),
+    cachedRoutes() {
+      const cachedRoutesArr = [];
+      this.visitedRoutes.forEach((item) => {
+        if (!item.meta.noKeepAlive) {
+          cachedRoutesArr.push(item.name);
+        }
+      });
+      this.handleSkeleton(cachedRoutesArr);
+      return cachedRoutesArr;
+    },
     key() {
       return this.$route.path;
     },
   },
   watch: {
-    $route(to, from) {
-      this.$nextTick(() => {
-        if (this.$store.state.tagsBar.skeleton) {
-          this.show = true;
-          setTimeout(() => {
-            this.show = false;
-          }, 200);
-        } else {
-          this.show = false;
-        }
+    $route: {
+      handler(route) {
         if ("mobile" === this.device) {
           this.$store.dispatch("settings/foldSideBar");
         }
-      });
+      },
+      immediate: true,
     },
   },
-  created() {},
+  created() {
+    //重载所有路由
+    this.$baseEventBus.$on("reloadRouterView", () => {
+      this.routerView = false;
+      this.skeleton = false;
+      this.$nextTick(() => {
+        this.routerView = true;
+        this.skeleton = true;
+      });
+    });
+  },
   mounted() {
     setTimeout(() => {
       this.show = false;
     }, 200);
   },
-  methods: {},
+  methods: {
+    // TODO 骨架屏处理还有bug我找到更好的解决方案待修复
+    handleSkeleton(cachedRoutesArr) {
+      if (this.skeleton) {
+        cachedRoutesArr.push(this.$route.name);
+        this.show = true;
+        setTimeout(() => {
+          this.show = false;
+        }, 200);
+      } else {
+        this.show = false;
+      }
+    },
+  },
 };
 </script>
 
@@ -82,10 +116,11 @@ export default {
   overflow: hidden;
 
   .footer-copyright {
-    min-height: 70px;
-    line-height: 35px;
+    min-height: 55px;
+    line-height: 55px;
     color: rgba(0, 0, 0, 0.45);
     text-align: center;
+    border-top: 1px dashed $base-border-color;
   }
 }
 </style>

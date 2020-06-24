@@ -67,7 +67,7 @@ export default {
       userName: "user/userName",
       visitedRoutes: "tagsBar/visitedRoutes",
       device: "settings/device",
-      routes: "permission/routes",
+      routes: "routes/routes",
     }),
 
     handleRoutes() {
@@ -86,7 +86,7 @@ export default {
         allArr.push(item);
       }
     });
-    this.$store.dispatch("permission/setPartialRoutes", allArr[0]);
+    this.$store.dispatch("routes/setPartialRoutes", allArr[0]);
   },
   methods: {
     handleClick(tab) {
@@ -96,7 +96,7 @@ export default {
           allArr.push(item);
         }
       });
-      this.$store.dispatch("permission/setPartialRoutes", allArr[tab.index]);
+      this.$store.dispatch("routes/setPartialRoutes", allArr[tab.index]);
     },
     handleCollapse() {
       this.$store.dispatch("settings/changeCollapse");

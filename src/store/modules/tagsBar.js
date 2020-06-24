@@ -1,213 +1,116 @@
+/**
+ * @copyright chuzhixin 1204505056@qq.com
+ * @description tagsBar多标签页逻辑，前期借鉴了很多开源项目发现都有个共同的特点很繁琐并不符合框架设计的初衷，后来在github用户cyea的启发下完成了重构，请勿修改
+ */
+
 const state = {
   visitedRoutes: [],
-  cachedRoutes: [],
-  skeleton: true,
 };
 const getters = {
-  cachedRoutes: (state) => state.cachedRoutes,
   visitedRoutes: (state) => state.visitedRoutes,
-  skeleton: (state) => state.skeleton,
 };
 const mutations = {
-  addVisitedRoute(state, view) {
-    if (state.visitedRoutes.some((v) => v.path === view.path)) return;
-    state.visitedRoutes.push(
-      Object.assign({}, view, { title: view.meta.title || "新标签页" })
-    );
+  addVisitedRoute(state, route) {
+    if (state.visitedRoutes.some((item) => item.path === route.path)) return;
+    state.visitedRoutes.push(Object.assign({}, route));
   },
-  addCachedRoutes(state, view) {
-    if (state.cachedRoutes.includes(view.name)) {
-      state.skeleton = false;
-      if (view.meta.noKeepAlive) {
-        state.skeleton = true;
+  delVisitedRoute(state, route) {
+    state.visitedRoutes.forEach((item, index) => {
+      if (item.path === route.path) {
+        state.visitedRoutes.splice(index, 1);
       }
-      return;
-    } else {
-      state.skeleton = true;
-    }
-    if (!view.meta.noKeepAlive) {
-      state.cachedRoutes.push(view.name);
-    }
-  },
-  delVisitedRoute(state, view) {
-    for (const [i, v] of state.visitedRoutes.entries()) {
-      if (v.path === view.path) {
-        state.visitedRoutes.splice(i, 1);
-        break;
-      }
-    }
-  },
-  delCachedRoutes(state, view) {
-    for (const i of state.cachedRoutes) {
-      if (i === view.name) {
-        const index = state.cachedRoutes.indexOf(i);
-        state.cachedRoutes.splice(index, 1);
-        break;
-      }
-    }
-  },
-  delOthersVisitedRoute(state, view) {
-    state.visitedRoutes = state.visitedRoutes.filter((v) => {
-      return v.meta.affix || v.path === view.path;
     });
   },
-  delOthersCachedRoutes(state, view) {
-    for (const i of state.cachedRoutes) {
-      if (i === view.name) {
-        const index = state.cachedRoutes.indexOf(i);
-        state.cachedRoutes = state.cachedRoutes.slice(index, index + 1);
-        break;
-      }
-    }
-  },
-  delLeftVisitedRoute(state, view) {
-    let _index = state.visitedRoutes.length;
-    state.visitedRoutes = state.visitedRoutes.filter((item, index) => {
-      if (item.name === view.name) {
-        _index = state.visitedRoutes.indexOf(item);
-      }
-      return item.meta.affix || _index <= state.visitedRoutes.indexOf(item);
+  delOthersVisitedRoute(state, route) {
+    state.visitedRoutes = state.visitedRoutes.filter((item) => {
+      return item.meta.affix || item.path === route.path;
     });
   },
-  delLeftCachedRoutes(state, view) {
-    for (const i of state.cachedRoutes) {
-      if (i === view.name) {
-        const index = state.cachedRoutes.indexOf(i);
-        state.cachedRoutes = state.cachedRoutes.slice(
-          index,
-          state.cachedRoutes.length
-        );
-        break;
+  delLeftVisitedRoute(state, route) {
+    let index = state.visitedRoutes.length;
+    state.visitedRoutes = state.visitedRoutes.filter((item) => {
+      if (item.name === route.name) {
+        index = state.visitedRoutes.indexOf(item);
       }
-    }
-  },
-  delRightVisitedRoute(state, view) {
-    let _index = state.visitedRoutes.length;
-    state.visitedRoutes = state.visitedRoutes.filter((item, index) => {
-      if (item.name === view.name) {
-        _index = state.visitedRoutes.indexOf(item);
-      }
-      return item.meta.affix || _index >= state.visitedRoutes.indexOf(item);
+      return item.meta.affix || index <= state.visitedRoutes.indexOf(item);
     });
   },
-  delRightCachedRoutes(state, view) {
-    for (const i of state.cachedRoutes) {
-      if (i === view.name) {
-        const index = state.cachedRoutes.indexOf(i);
-        state.cachedRoutes = state.cachedRoutes.slice(0, index + 1);
-        break;
+  delRightVisitedRoute(state, route) {
+    let index = state.visitedRoutes.length;
+    state.visitedRoutes = state.visitedRoutes.filter((item) => {
+      if (item.name === route.name) {
+        index = state.visitedRoutes.indexOf(item);
       }
-    }
+      return item.meta.affix || index >= state.visitedRoutes.indexOf(item);
+    });
   },
   delAllVisitedRoutes(state) {
-    const affixTags = state.visitedRoutes.filter((tag) => tag.meta.affix);
-    state.visitedRoutes = affixTags;
+    state.visitedRoutes = state.visitedRoutes.filter((item) => item.meta.affix);
   },
-  delAllCachedRoutess(state) {
-    state.cachedRoutes = [];
-  },
-  updateVisitedRoute(state, view) {
-    for (let v of state.visitedRoutes) {
-      if (v.path === view.path) {
-        v = Object.assign(v, view);
-        break;
+  updateVisitedRoute(state, route) {
+    state.visitedRoutes.forEach((item) => {
+      if (item.path === route.path) {
+        item = Object.assign(item, route);
       }
-    }
+    });
   },
 };
 const actions = {
-  addRoute({ dispatch }, view) {
-    dispatch("addVisitedRoute", view);
-    dispatch("addCachedRoutes", view);
+  addVisitedRoute({ commit }, route) {
+    commit("addVisitedRoute", route);
   },
-  addVisitedRoute({ commit }, view) {
-    commit("addVisitedRoute", view);
-  },
-  addCachedRoutes({ commit }, view) {
-    commit("addCachedRoutes", view);
-  },
-  async delRoute({ dispatch, state }, view) {
-    await dispatch("delVisitedRoute", view);
-    await dispatch("delCachedRoutes", view);
+  async delRoute({ dispatch, state }, route) {
+    await dispatch("delVisitedRoute", route);
     return {
       visitedRoutes: [...state.visitedRoutes],
-      cachedRoutes: [...state.cachedRoutes],
     };
   },
-  delVisitedRoute({ commit, state }, view) {
-    commit("delVisitedRoute", view);
+  delVisitedRoute({ commit, state }, route) {
+    commit("delVisitedRoute", route);
     return [...state.visitedRoutes];
   },
-  delCachedRoutes({ commit, state }, view) {
-    commit("delCachedRoutes", view);
-    return [...state.cachedRoutes];
-  },
-  async delOthersRoutes({ dispatch, state }, view) {
-    await dispatch("delOthersVisitedRoute", view);
-    await dispatch("delOthersCachedRoutes", view);
+  async delOthersRoutes({ dispatch, state }, route) {
+    await dispatch("delOthersVisitedRoute", route);
     return {
       visitedRoutes: [...state.visitedRoutes],
-      cachedRoutes: [...state.cachedRoutes],
     };
   },
-  async delLeftRoutes({ dispatch, state }, view) {
-    await dispatch("delLeftVisitedRoute", view);
-    await dispatch("delLeftCachedRoutes", view);
+  async delLeftRoutes({ dispatch, state }, route) {
+    await dispatch("delLeftVisitedRoute", route);
     return {
       visitedRoutes: [...state.visitedRoutes],
-      cachedRoutes: [...state.cachedRoutes],
     };
   },
-  async delRightRoutes({ dispatch, state }, view) {
-    await dispatch("delRightVisitedRoute", view);
-    await dispatch("delRightCachedRoutes", view);
+  async delRightRoutes({ dispatch, state }, route) {
+    await dispatch("delRightVisitedRoute", route);
     return {
       visitedRoutes: [...state.visitedRoutes],
-      cachedRoutes: [...state.cachedRoutes],
     };
   },
-  delOthersVisitedRoute({ commit, state }, view) {
-    commit("delOthersVisitedRoute", view);
+  delOthersVisitedRoute({ commit, state }, route) {
+    commit("delOthersVisitedRoute", route);
     return [...state.visitedRoutes];
   },
-  delOthersCachedRoutes({ commit, state }, view) {
-    commit("delOthersCachedRoutes", view);
-    return [...state.cachedRoutes];
-  },
-  delLeftVisitedRoute({ commit, state }, view) {
-    commit("delLeftVisitedRoute", view);
+  delLeftVisitedRoute({ commit, state }, route) {
+    commit("delLeftVisitedRoute", route);
     return [...state.visitedRoutes];
   },
-  delLeftCachedRoutes({ commit, state }, view) {
-    commit("delLeftCachedRoutes", view);
-    return [...state.cachedRoutes];
-  },
-  delRightVisitedRoute({ commit, state }, view) {
-    commit("delRightVisitedRoute", view);
+  delRightVisitedRoute({ commit, state }, route) {
+    commit("delRightVisitedRoute", route);
     return [...state.visitedRoutes];
   },
-  delRightCachedRoutes({ commit, state }, view) {
-    commit("delRightCachedRoutes", view);
-    return [...state.cachedRoutes];
-  },
-  async delAllRoutes({ dispatch, state }, view) {
-    await dispatch("delAllVisitedRoutes", view);
-    await dispatch("delAllCachedRoutess", view);
+  async delAllRoutes({ dispatch, state }, route) {
+    await dispatch("delAllVisitedRoutes", route);
     return {
       visitedRoutes: [...state.visitedRoutes],
-      cachedRoutes: [...state.cachedRoutes],
     };
   },
   delAllVisitedRoutes({ commit, state }) {
     commit("delAllVisitedRoutes");
     return [...state.visitedRoutes];
   },
-  delAllCachedRoutess({ commit, state }) {
-    commit("delAllCachedRoutess");
-    return [...state.cachedRoutes];
-  },
-  updateVisitedRoute({ commit }, view) {
-    commit("updateVisitedRoute", view);
+  updateVisitedRoute({ commit }, route) {
+    commit("updateVisitedRoute", route);
   },
 };
 export default { state, getters, mutations, actions };

@@ -117,6 +117,14 @@ const data = [
     content: "添加炫酷地图组件",
     timestamp: "2020-06-11",
   },
+  {
+    content: "抽离更多公共配置，框架使用更顺手",
+    timestamp: "2020-06-19",
+  },
+  {
+    content: "彻底完成了tagsbar多标签页的重构",
+    timestamp: "2020-06-22",
+  },
 ];
 
 export default [

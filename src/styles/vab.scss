@@ -1,3 +1,8 @@
+/**
+ * @copyright chuzhixin 1204505056@qq.com
+ * @description 全局样式
+ */
+
 @charset "utf-8";
 
 @import "./transition.scss";
@@ -131,7 +136,7 @@ html {
         @include base-scrollbar;
 
         > [class*="-container"] {
-          padding: 15px;
+          padding: $base-padding;
           background: $base-color-white;
         }
       }

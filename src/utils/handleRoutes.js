@@ -1,4 +1,5 @@
 /**
+ * @copyright chuzhixin 1204505056@qq.com
  * @description all模式渲染后端返回路由
  * @param constantRoutes
  * @returns {*}
@@ -12,7 +13,17 @@ export function filterAllRoutes(constantRoutes) {
         route.component = (resolve) =>
           require(["@/layouts/EmptyLayout"], resolve);
       } else {
-        const path = "views/" + route.component;
+        let path = "views/" + route.component;
+        if (
+          new RegExp("^/views/.*$").test(route.component) ||
+          new RegExp("^views/.*$").test(route.component)
+        ) {
+          path = route.component;
+        } else if (new RegExp("^/.*$").test(route.component)) {
+          path = "views" + route.component;
+        } else {
+          path = "views/" + route.component;
+        }
         route.component = (resolve) => require([`@/${path}`], resolve);
       }
     }
@@ -27,6 +38,7 @@ export function filterAllRoutes(constantRoutes) {
 }
 
 /**
+ * @copyright chuzhixin 1204505056@qq.com
  * @description 判断当前路由是否包含权限
  * @param permissions
  * @param route
@@ -41,6 +53,7 @@ function hasPermission(permissions, route) {
 }
 
 /**
+ * @copyright chuzhixin 1204505056@qq.com
  * @description intelligence模式根据permissions数组拦截路由
  * @param routes
  * @param permissions
